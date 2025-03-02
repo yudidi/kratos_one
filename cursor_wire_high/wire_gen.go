@@ -9,9 +9,12 @@ package main
 // Injectors from wire.go:
 
 // InitMission 注入器，用于创建并注入依赖
-func InitMission(name string) Mission {
-	player := NewPlayer(name)
+func InitMission(name string) (Mission, error) {
+	player, err := NewPlayer(name)
+	if err != nil {
+		return Mission{}, err
+	}
 	monster := NewMonster()
 	mission := NewMission(player, monster)
-	return mission
+	return mission, nil
 }

@@ -1,7 +1,10 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"log"
+	"time"
 )
 
 // Monster 怪物结构
@@ -20,8 +23,11 @@ type Player struct {
 }
 
 // NewPlayer 创建一个新的勇士
-func NewPlayer(name string) Player {
-	return Player{Name: name}
+func NewPlayer(name string) (Player, error) {
+	if time.Now().Unix()%2 == 0 {
+		return Player{}, errors.New("勇士已死亡")
+	}
+	return Player{Name: name}, nil
 }
 
 // Mission 任务结构
@@ -42,6 +48,9 @@ func (m Mission) Start() {
 
 func main() {
 	// 使用wire自动注入依赖
-	mission := InitMission("dj")
+	mission, err := InitMission("dj")
+	if err != nil {
+		log.Fatal(err)
+	}
 	mission.Start()
 }
