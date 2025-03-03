@@ -32,3 +32,9 @@ make all
  - .pb.go 文件：包含了 helloworld.proto 文件中定义的所有 message 消息结构的 Go 语言实现代码。
  - _grpc.pb.go 文件：包含了 gRPC 客户端代码，用于通过 gRPC 协议调用 helloworld.proto 中定义的服务接口。
  - _http.pb.go 文件 (如果 proto 文件中定义了 HTTP 路由)：包含了 HTTP 客户端代码，用于通过 HTTP 协议调用 helloworld.proto 中定义的服务接口。 需要注意的是，只有当你的 .proto 文件中使用了 google.api.http 选项定义了 HTTP 路由规则时，才会生成 HTTP 客户端代码。
+
+### 区别:kratos proto client api/server/server_http.proto 和 api/server/server.proto
+
+执行kratos proto client api/server/server_http.proto
+生成go和gprc+http的客户端
+openapi.yaml也会跟着变
